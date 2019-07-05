@@ -1,0 +1,71 @@
+{
+  "name": "QXAdsManager",
+  "version": "0.1.4",
+  "summary": "广告管理",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://gitee.com/me_zqx/guanggaoguanli",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "me_zqx": "me_zqx@163.com"
+  },
+  "source": {
+    "git": "https://gitee.com/me_zqx/guanggaoguanli.git",
+    "tag": "0.1.4"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "QXAdsManager/Classes/**/*",
+  "resource_bundles": {
+    "QXAdsManager": [
+      "QXAdsManager/Assets/*.png"
+    ]
+  },
+  "static_framework": true,
+  "vendored_frameworks": [
+    "QXAdsManager/Frameworks/BaiduMobAdSDK.framework",
+    "QXAdsManager/Frameworks/BUAdSDK.framework",
+    "QXAdsManager/Frameworks/GoogleAppMeasurement.framework",
+    "QXAdsManager/Frameworks/GoogleMobileAds.framework",
+    "QXAdsManager/Frameworks/GoogleUtilities.framework",
+    "QXAdsManager/Frameworks/InMobiSDK.framework",
+    "QXAdsManager/Frameworks/nanopb.framework",
+    "QXAdsManager/Frameworks/UnityAds.framework"
+  ],
+  "vendored_libraries": "QXAdsManager/Classes/GDTlib/*.{a}",
+  "frameworks": [
+    "UIKit",
+    "MapKit",
+    "WebKit",
+    "StoreKit",
+    "AVFoundation",
+    "AdSupport",
+    "CoreMotion",
+    "MessageUI",
+    "CoreLocation",
+    "SafariServices",
+    "CoreMedia",
+    "MediaPlayer",
+    "SystemConfiguration",
+    "Security",
+    "QuartzCore"
+  ],
+  "libraries": [
+    "sqlite3.0",
+    "z",
+    "xml2",
+    "resolv.9",
+    "c++"
+  ],
+  "dependencies": {
+    "Masonry": [
+      "~> 1.1.0"
+    ],
+    "YYWebImage": [
+      "~> 1.0.5"
+    ]
+  }
+}

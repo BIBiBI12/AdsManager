@@ -1,0 +1,10 @@
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Masonry" "${PODS_CONFIGURATION_BUILD_DIR}/QXAdsManager" "${PODS_CONFIGURATION_BUILD_DIR}/YYCache" "${PODS_CONFIGURATION_BUILD_DIR}/YYImage" "${PODS_CONFIGURATION_BUILD_DIR}/YYWebImage" "${PODS_ROOT}/../../QXAdsManager/Frameworks"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Masonry/Masonry.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/QXAdsManager/QXAdsManager.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/YYCache/YYCache.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/YYImage/YYImage.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/YYWebImage/YYWebImage.framework/Headers"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../../QXAdsManager/Classes/GDTlib"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"GDTMobSDK" -l"c++" -l"resolv.9" -l"sqlite3" -l"sqlite3.0" -l"xml2" -l"z" -framework "AVFoundation" -framework "Accelerate" -framework "AdSupport" -framework "AssetsLibrary" -framework "BUAdSDK" -framework "BaiduMobAdSDK" -framework "CoreFoundation" -framework "CoreLocation" -framework "CoreMedia" -framework "CoreMotion" -framework "Foundation" -framework "GoogleAppMeasurement" -framework "GoogleMobileAds" -framework "GoogleUtilities" -framework "ImageIO" -framework "InMobiSDK" -framework "MapKit" -framework "Masonry" -framework "MediaPlayer" -framework "MessageUI" -framework "MobileCoreServices" -framework "QXAdsManager" -framework "QuartzCore" -framework "SafariServices" -framework "Security" -framework "StoreKit" -framework "SystemConfiguration" -framework "UIKit" -framework "UnityAds" -framework "WebKit" -framework "YYCache" -framework "YYImage" -framework "YYWebImage" -framework "nanopb"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods

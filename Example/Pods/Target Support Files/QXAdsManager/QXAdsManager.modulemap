@@ -1,0 +1,6 @@
+framework module QXAdsManager {
+  umbrella header "QXAdsManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

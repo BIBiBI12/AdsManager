@@ -1,0 +1,6 @@
+framework module Pods_QXAdsManager_Example {
+  umbrella header "Pods-QXAdsManager_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

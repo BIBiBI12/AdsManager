@@ -1,0 +1,16 @@
+use_frameworks!
+
+#source 'https://gitee.com/me_zqx/guanggaoguanli.git'
+
+platform :ios, '8.0'
+
+target 'QXAdsManager_Example' do
+  
+  pod 'QXAdsManager' , :path => '../'
+
+  target 'QXAdsManager_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
