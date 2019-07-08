@@ -7,9 +7,13 @@
 //
 
 @import UIKit;
+#import "DW_ADS.h"
+
 
 @interface QX_AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (nonatomic, strong) DW_SplashAds *splashAds;
 
 @end

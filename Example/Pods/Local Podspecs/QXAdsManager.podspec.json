@@ -1,9 +1,9 @@
 {
   "name": "QXAdsManager",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "summary": "广告管理",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://gitee.com/me_zqx/guanggaoguanli",
+  "homepage": "https://github.com/BIBiBI12/QXAdsManager",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,8 +12,8 @@
     "me_zqx": "me_zqx@163.com"
   },
   "source": {
-    "git": "https://gitee.com/me_zqx/guanggaoguanli.git",
-    "tag": "0.1.4"
+    "git": "https://github.com/BIBiBI12/QXAdsManager.git",
+    "tag": "0.1.5"
   },
   "platforms": {
     "ios": "8.0"
@@ -21,7 +21,7 @@
   "source_files": "QXAdsManager/Classes/**/*",
   "resource_bundles": {
     "QXAdsManager": [
-      "QXAdsManager/Assets/*.png"
+      "QXAdsManager/Assets/*.bundle"
     ]
   },
   "static_framework": true,

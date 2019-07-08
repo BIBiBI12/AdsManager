@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol DW_SplashAdsProtocol <NSObject>
 
+@optional
 /**
  开屏广告加载完成
  

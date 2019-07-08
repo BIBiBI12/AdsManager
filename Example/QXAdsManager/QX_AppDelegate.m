@@ -7,18 +7,51 @@
 //
 
 #import "QX_AppDelegate.h"
-#import "DW_ADS.h"
+#import "SplashPlaceholderView.h"
+
+
+@interface QX_AppDelegate()<DW_SplashAdsProtocol>
+
+@end
+
 @implementation QX_AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self regAd];
+    
+    [self showSplashAds];
+    
     return YES;
 }
 
 - (void)regAd{
      DW_AdsPlatformsInfo *platformInfo = [[DW_AdsPlatformsInfo alloc] initWithGdtAppId:@"1105344611" unityAppId:@"3183624" googleAppId:@"" inMobiAppId:@"9e2be5cb53e84caf861ce7528d7b8092" baiduAppId:@"ccb60059" BuAppId:@"5020701"];
     [platformInfo registerAds];
+}
+
+/**
+ 展示开屏广告
+ 广点通 测试id  9040714184494018
+ 穿山甲 测试id  820701707
+ 百度   测试id  2058492
+ */
+- (void)showSplashAds{
+    SplashPlaceholderView *placeholderView = [[SplashPlaceholderView alloc] initWithLogoImage:[UIImage imageNamed:@"logo"] logoSize:CGSizeMake(50, 50)];
+    placeholderView.backgroundColor = [UIColor whiteColor];
+    
+    self.splashAds = [[DW_SplashAds alloc] initWithAdsPlatformType:DWSplashPlatformBu adsId:@"820701707" window:self.window placeholder:placeholderView];
+    self.splashAds.delegate = self;
+    [self.splashAds loadAdAndShowInWindow:self.window];
+}
+
+#pragma mark -- DW_SplashAdsProtocol
+- (void)splashAdDidLoad{
+    NSLog(@"加载完成");
+}
+
+- (void)splashAdDidFailWithError:(NSError *)error{
+    NSLog(@"加载穿山甲失败 原因: %@",error);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

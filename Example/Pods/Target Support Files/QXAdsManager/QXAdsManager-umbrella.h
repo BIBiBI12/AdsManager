@@ -28,6 +28,7 @@
 #import "DW_NativeInterstitialAds.h"
 #import "DW_NativeInterstitialViewController.h"
 #import "DW_NativeProtocol.h"
+#import "SplashPlaceholderView.h"
 #import "GDTHybridAd.h"
 #import "GDTLogoView.h"
 #import "GDTMediaView.h"

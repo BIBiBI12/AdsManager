@@ -29,11 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param adsPlatformType 开屏广告平台类型
  @param adsId 广告id
+ @param window 即将展示广告的window
+ @param placeholder 占位图  图片/自定义控件
  @return 开屏广告实列
  */
 - (instancetype)initWithAdsPlatformType:(SplashADSPlatformType)adsPlatformType
                                   adsId:(NSString *)adsId
-                                 window:(UIWindow *)window;
+                                 window:(UIWindow *)window
+                            placeholder:(id)placeholder;
 
 
 /**

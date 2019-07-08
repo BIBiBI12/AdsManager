@@ -9,14 +9,11 @@
 #import "DW_SplashAds.h"
 #import "GDTSplashAd.h"
 #import "DW_AdsPlatformsInfo.h"
-//#import <BUAdSDK/BUBannerAdView.h>
 #import <BUAdSDK/BUAdSDK.h>
 #import <BaiduMobAdSDK/BaiduMobAdSplash.h>
 #import <BaiduMobAdSDK/BaiduMobAdSplashDelegate.h>
-#import "DW_ADSTypeDefine.h"
 #import "DW_ADSManager.h"
-
-
+#import "Masonry.h"
 
 @interface DW_SplashAds()<GDTSplashAdDelegate,BUSplashAdDelegate,BaiduMobAdSplashDelegate>
 @property (nonatomic, strong) UIWindow *window;
@@ -25,28 +22,54 @@
 @property (nonatomic, strong) GDTSplashAd *gdtSplashAds;
 @property (nonatomic, strong) BUSplashAdView *buSplashAdsView;
 @property (nonatomic, strong) BaiduMobAdSplash *baiduSplashAds;
+@property (nonatomic, strong) UIImageView *placeholderView;
+@property (nonatomic, strong) id placeholder;
+
 @end
 
 @implementation DW_SplashAds
 
 - (instancetype)initWithAdsPlatformType:(SplashADSPlatformType)adsPlatformType
                                   adsId:(NSString *)adsId
-                                 window:(UIWindow *)window{
+                                 window:(UIWindow *)window
+                            placeholder:(id)placeholder{
     self = [self init];
     if (self) {
         self.splashAdsPlatformType = adsPlatformType;
         self.adsId = adsId;
         self.window = window;
+        self.placeholder = placeholder;
         [self setUI];
     }
     return self;
 }
 
+//添加展位图控件
+- (void)addPlaceholderView{
+    if ([DW_ADSManager getAdsStatus]) {
+        return;
+    }
+    if (nil == self.placeholder) {
+        return;
+    }
+    
+    if ([self.placeholder isKindOfClass:[UIView class]]) {
+        self.placeholderView = self.placeholder;
+    }else if ([self.placeholder isKindOfClass:[UIImage class]]){
+        self.placeholderView.image = (UIImage *)self.placeholder;
+    }
+    [self.window.rootViewController.view addSubview:self.placeholderView];
+    [self.placeholderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.window.rootViewController.view);
+    }];
+}
+
 - (void)setUI{
+    [self addPlaceholderView];
     switch (self.splashAdsPlatformType) {
-            case DWSplashPlatformBu:{
-                self.splashView = self.buSplashAdsView;
-            }
+        case DWSplashPlatformBu:{
+            self.splashView = self.buSplashAdsView;
+        }
             break;
             
         default:
@@ -61,25 +84,24 @@
     }
     switch (self.splashAdsPlatformType) {
             //广点通
-            case DWSplashPlatformTypeGDT:{
-                [self.gdtSplashAds loadAdAndShowInWindow:window];
-            }
+        case DWSplashPlatformTypeGDT:{
+            [self.gdtSplashAds loadAdAndShowInWindow:window];
+        }
             break;
             
             //百度
-            case DWSplashPlatformBaidu:{
-                [self.baiduSplashAds loadAndDisplayUsingKeyWindow:self.window];
-            }
+        case DWSplashPlatformBaidu:{
+            [self.baiduSplashAds loadAndDisplayUsingKeyWindow:self.window];
+        }
             break;
             
             //穿山甲
-            case DWSplashPlatformBu:{
-                [self.buSplashAdsView loadAdData];
-                self.buSplashAdsView.backgroundColor = [UIColor colorWithRed:83 green:21 blue:147 alpha:1];
-                [self.window addSubview:self.buSplashAdsView];
-                self.buSplashAdsView.rootViewController = self.window.rootViewController;
-                
-            }
+        case DWSplashPlatformBu:{
+            [self.buSplashAdsView loadAdData];
+            [self.window.rootViewController.view addSubview:self.buSplashAdsView];
+            self.buSplashAdsView.rootViewController = self.window.rootViewController;
+            [self addPlaceholderView];
+        }
             break;
             
         default:
@@ -94,6 +116,10 @@
         [self.delegate splashAdDidLoad];
     }
     NSLog(@"成功展示 广点通开屏页");
+    if ([self.placeholderView superview]) {
+        [self.placeholderView removeFromSuperview];
+    }
+    
 }
 
 //开屏广告展示失败
@@ -101,6 +127,9 @@
     NSLog(@"展示失败  广点通开屏页： %@",error);
     if ([self.delegate respondsToSelector:@selector(splashAdDidFailWithError:)]) {
         [self.delegate splashAdDidFailWithError:error];
+    }
+    if ([self.placeholderView superview]) {
+        [self.placeholderView removeFromSuperview];
     }
 }
 
@@ -114,6 +143,9 @@
         [self.delegate splashAdDidLoad];
     }
     NSLog(@"开屏广告加载完成");
+    if ([self.placeholderView superview]) {
+        [self.placeholderView removeFromSuperview];
+    }
 }
 
 - (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error{
@@ -121,6 +153,9 @@
     [splashAd removeFromSuperview];
     if ([self.delegate respondsToSelector:@selector(splashAdDidFailWithError:)]) {
         [self.delegate splashAdDidFailWithError:error];
+    }
+    if ([self.placeholderView superview]) {
+        [self.placeholderView removeFromSuperview];
     }
 }
 
@@ -138,6 +173,9 @@
     if ([self.delegate respondsToSelector:@selector(splashAdDidLoad)]) {
         [self.delegate splashAdDidLoad];
     }
+    if ([self.placeholderView superview]) {
+        [self.placeholderView removeFromSuperview];
+    }
 }
 
 - (void)splashlFailPresentScreen:(BaiduMobAdSplash *)splash withError:(BaiduMobFailReason) reason{
@@ -154,6 +192,9 @@
         NSError *customError = [[NSError alloc] initWithDomain:message code:2 userInfo:nil];
         [self.delegate splashAdDidFailWithError:customError];
     }
+    if ([self.placeholderView superview]) {
+        [self.placeholderView removeFromSuperview];
+    }
 }
 
 #pragma mark -- lazy
@@ -162,7 +203,6 @@
         _gdtSplashAds = [[GDTSplashAd alloc] initWithAppId:[DW_AdsPlatformsInfo shareInfo].gdtAppId placementId:self.adsId];
         _gdtSplashAds.delegate = self;
         _gdtSplashAds.fetchDelay = 5;
-        _gdtSplashAds.backgroundColor = [UIColor redColor];
     }
     return _gdtSplashAds;
 }
@@ -186,4 +226,10 @@
     return _baiduSplashAds;
 }
 
+- (UIImageView *)placeholderView{
+    if (nil == _placeholderView) {
+        _placeholderView = [UIImageView new];
+    }
+    return _placeholderView;
+}
 @end
